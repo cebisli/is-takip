@@ -15,7 +15,7 @@
 
 </head>
 
-<body>
+<body> 
     <div id="app">
         <div id="sidebar" class="active">
             <div class="sidebar-wrapper active">
