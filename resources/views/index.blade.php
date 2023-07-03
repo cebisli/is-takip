@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="{{asset("/")}}assets/css/shared/iconly.css">
 
 </head>
-
+ 
 <body> 
     <div id="app">
         <div id="sidebar" class="active">
