@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 })->name('ana_sayfa');
+
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/admin', function () {
+//         return view('admin.index');
+//     })->name('ana_sayfa');
+// });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin', [MainController::class, 'index'])->name('ana_sayfa1');
+});

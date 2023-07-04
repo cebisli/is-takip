@@ -1,5 +1,5 @@
-@include('layout.header')
-@include('layout.solMenu')
+@include('admin.include.header')
+@include('admin.include.solMenu')
 
         <div id="main">
             <header class="mb-3">
@@ -11,4 +11,4 @@
             @yield('main')
             
             
-@include('layout.footer')
+@include('admin.include.footer')

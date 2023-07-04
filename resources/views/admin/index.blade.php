@@ -1,4 +1,4 @@
-@extends('home')
+@extends('admin.ana-yapi')
 @section('title')
     İş Takip Sistemi
 @endsection
