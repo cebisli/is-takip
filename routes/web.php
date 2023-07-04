@@ -16,7 +16,7 @@ use App\Http\Controllers\MainController;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('ana_sayfa');
+});
 
 // Route::middleware([
 //     'auth:sanctum',
@@ -29,5 +29,5 @@ Route::get('/', function () {
 // });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin', [MainController::class, 'index'])->name('ana_sayfa1');
+    Route::get('/admin', [MainController::class, 'index'])->name('ana_sayfa');
 });
