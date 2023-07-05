@@ -14,13 +14,18 @@
                 <div class="alert alert-danger">Ana Sayfa</div>
             </div>
 
-            
+            <button onclick="Tikla()">Tıkla</button>
 
         </section>
     </div>
 @endsection
 @section('js')
     <script>
-
+        function Tikla()
+        {
+            ShowInfo('1231', function() {
+                alert(1);
+            });
+        }
     </script>
 @endsection

@@ -13,13 +13,10 @@
 </div>
 <script src="{{ asset('/') }}assets/js/bootstrap.js"></script>
 <script src="{{ asset('/') }}assets/js/app.js"></script>
-
-<!-- Need: Apexcharts -->
-<script src="{{ asset('/') }}assets/extensions/apexcharts/apexcharts.min.js"></script>
-<script src="{{ asset('/') }}assets/js/pages/dashboard.js"></script>
-
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 @yield('js')
 
+<script src="{{ asset('js/common.js') }}"></script>
 </body>
 
 </html>

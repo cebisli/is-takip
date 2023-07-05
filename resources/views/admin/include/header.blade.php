@@ -13,7 +13,11 @@
 
     <link rel="stylesheet" href="{{ asset('/') }}assets/css/shared/iconly.css">
     <link rel="stylesheet" href="{{ asset('/') }}genel.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script src="{{ asset('js/app.js') }}"></script>
+    
 
     @yield('css')
 </head>

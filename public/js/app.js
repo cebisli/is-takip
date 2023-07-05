@@ -5224,6 +5224,9 @@ __webpack_require__.r(__webpack_exports__);
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"].start();
 
+window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_1___default());
+window.$ = (jquery__WEBPACK_IMPORTED_MODULE_1___default());
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
