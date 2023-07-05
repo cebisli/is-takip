@@ -23,11 +23,16 @@
 
     
     <div id="FirmaIptalEkran" title="Satınalma İptali" style="display:none;">
-        <b>Siparişte hiç ürün bulunmamaktadır.</b><br>
-        Bu durumda satınalma süreci sonlandırılacak ve talep edilmiş ürünler daha sonra yürütücü tarafından tekrar talep edilebilecektir.<br>
-        <input id="SatinalmaIptalMail" type="checkbox"><label for="SatinalmaIptalMail" >Satınalma iptalini firmalara bildir</label>
-        <b>İptal Nedeni:</b><br>
-        <textarea id="IptalNeden" style="width:100%"></textarea>
+        <form>
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Recipient:</label>
+              <input type="text" class="form-control" id="recipient-name">
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text"></textarea>
+            </div>
+          </form>
     </div>
     
 @endsection
@@ -36,9 +41,14 @@
         function Tikla()
         {
             
-            showModal('File Deletion', 'Do you want to delete this file?', "Yes", "No", function(){
-                ShowInfo('Tamam');
-            });
+            ShowBSDialog('FirmaIptalEkran', 'Deneme', "Yes", "No", function(){
+                var val = $('#recipient-name').val();
+                if (val == '')
+                {
+                    ShowInfo('Tüm alanları doldurunuz');
+                    return false;
+                }
+            }, Modal_XLarge);
         }
     </script>
 @endsection
