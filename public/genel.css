@@ -7,3 +7,21 @@ footer {
     position: absolute !important;
     bottom: 5px;
 }
+
+.modal.js-table .modal-header {
+	background: #659be0;
+	color: white;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.modal.js-table .modal-header .fa-close{
+	cursor: pointer;
+}
+
+.modal.js-table .modal-header:before,
+.modal.js-table .modal-header:after {
+	display: none;
+}

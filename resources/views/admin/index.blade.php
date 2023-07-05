@@ -15,16 +15,29 @@
             </div>
 
             <button onclick="Tikla()">Tıkla</button>
-
+            
         </section>
+
+        
     </div>
+
+    
+    <div id="FirmaIptalEkran" title="Satınalma İptali" style="display:none;">
+        <b>Siparişte hiç ürün bulunmamaktadır.</b><br>
+        Bu durumda satınalma süreci sonlandırılacak ve talep edilmiş ürünler daha sonra yürütücü tarafından tekrar talep edilebilecektir.<br>
+        <input id="SatinalmaIptalMail" type="checkbox"><label for="SatinalmaIptalMail" >Satınalma iptalini firmalara bildir</label>
+        <b>İptal Nedeni:</b><br>
+        <textarea id="IptalNeden" style="width:100%"></textarea>
+    </div>
+    
 @endsection
 @section('js')
     <script>
         function Tikla()
         {
-            ShowInfo('1231', function() {
-                alert(1);
+            
+            showModal('File Deletion', 'Do you want to delete this file?', "Yes", "No", function(){
+                ShowInfo('Tamam');
             });
         }
     </script>
