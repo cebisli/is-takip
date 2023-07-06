@@ -156,7 +156,7 @@ function JsDataTable(tableId)
 	var table = $('#'+tableId).dataTable(obj);
 
 	var row = $('#Musteriler_wrapper').find('.row').first();
-	row.remove();
+	var div = $(row).find('div').end().empty();
 
 	return table;
 }
