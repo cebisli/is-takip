@@ -148,15 +148,24 @@ const ShowBSDialog = (divId, title, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel', 
 
 function JsDataTable(tableId)
 {
-
 	var obj = {
 		paging: false,
 		autoWidth: false,
 	};
 	var table = $('#'+tableId).dataTable(obj);
 
-	var row = $('#Musteriler_wrapper').find('.row').first();
-	var div = $(row).find('div').end().empty();
+	var row = $('#'+tableId+'_wrapper').find('.row').first();
+	var div = $(row).find('div').end();
+	div.empty();
+	var searchInput = `<div id="`+tableId+`_filter"
+	 class='dataTables_filter'><input type='search' class='form-control form-control-sm' 
+	 style='width:100%;' aria-controls="`+tableId+`"/></div>`;
 
+	div.append(searchInput);
 	return table;
 }
+
+$(document).on('keyup', "input[type='search']", function(){
+	var oTable = $('.dataTable').dataTable();
+	oTable.fnFilter($(this).val());
+});
