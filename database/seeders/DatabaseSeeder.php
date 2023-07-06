@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => '$2y$10$JJrUBIp7b3k9stPpkTJ6.egFIeZxAXdJc4evZQhNXe.1nam2seyt.', // 123456789
             'remember_token' => Str::random(10),
+            'type' => 'admin',
         ]);
 
          \App\Models\User::factory(1)->create();

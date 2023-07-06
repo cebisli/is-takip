@@ -32,7 +32,7 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="component-alert.html">Müşteri Listesi</a>
+                            <a href="{{route('musteriler')}}">Müşteri Listesi</a>
                         </li>                        
                     </ul>
                 </li>

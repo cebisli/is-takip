@@ -30,4 +30,5 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [MainController::class, 'index'])->name('ana_sayfa');
+    Route::get('/admin/musteriler', [MainController::class, 'musteriler'])->name('musteriler');
 });

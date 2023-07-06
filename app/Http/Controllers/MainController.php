@@ -10,4 +10,9 @@ class MainController extends Controller
     {
         return view('admin/index');
     }
+
+    function musteriler()
+    {
+        return view('admin/musteriler');
+    }
 }

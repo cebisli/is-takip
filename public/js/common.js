@@ -37,6 +37,7 @@ var COMMONLANG = {
 	WINDOW_CLOSE_CONFIRMATION : 'Sayfadan ayrıldığınızda yapılan değişiklikler kaybedilecektir',
 	PLEASE_WAIT : 'Lütfen bekleyiniz'
 };
+
 var modalWrap = null;
 UseSwal = true;
 UseSwalV2 = false;
@@ -144,3 +145,18 @@ const ShowBSDialog = (divId, title, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel', 
 	}; 
   
   }
+
+function JsDataTable(tableId)
+{
+
+	var obj = {
+		paging: false,
+		autoWidth: false,
+	};
+	var table = $('#'+tableId).dataTable(obj);
+
+	var row = $('#Musteriler_wrapper').find('.row').first();
+	row.remove();
+
+	return table;
+}
