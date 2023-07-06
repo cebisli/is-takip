@@ -9,5 +9,5 @@ class Musteriler extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Unvan', 'YetkiliAdSoyad', 'VergiNumarasi', 'VergiDairesi', 'Telefon', 'EMail', 'Il', 'Ilce', 'adres'];
+    protected $fillable = ['Unvan', 'YetkiliAdSoyad', 'VergiNumarasi', 'VergiDairesi', 'Telefon', 'EMail', 'Il', 'Ilce', 'Adres'];
 }

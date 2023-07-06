@@ -23,7 +23,7 @@ class Musteriler extends Migration
             $table->string('EMail');
             $table->string('Il');
             $table->string('Ilce');
-            $table->longText('adres')->default('');
+            $table->longText('Adres')->default('');
             $table->timestamps();
         });
     }

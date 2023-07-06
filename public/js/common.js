@@ -91,7 +91,7 @@ const Modal_FullScreen = 3;
 const Modal_DialogScrollable = 5;
 
 
-const ShowBSDialog = (divId, title, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel', callback, tur = 0) => 
+const ShowBSDialog = (divId, callback, tur = 0) => 
 {
 	if (modalWrap !== null) {
 	  modalWrap.remove();
@@ -110,12 +110,13 @@ const ShowBSDialog = (divId, title, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel', 
 		modalClass = "modal-dialog-scrollable";
 
 	var div = $('#' + divId).show();
+	var title = $('#' + divId).attr('title');
 	var modalId = divId + '_modal';
 
 	modalWrap = document.createElement('div');
 	modalWrap.innerHTML = `
 	  <div class="modal fade" tabindex="-1" id="`+modalId+`">
-		<div class="modal-dialog modal-dialog-centered `+modalClass+`">
+		<div class="modal-dialog `+modalClass+`">
 		  <div class="modal-content">
 			<div class="modal-header bg-light">
 			  <h5 class="modal-title">${title}</h5>
@@ -123,26 +124,33 @@ const ShowBSDialog = (divId, title, yesBtnLabel = 'Yes', noBtnLabel = 'Cancel', 
 			</div>
 			<div class="modal-body">			  
 			</div>
-			<div class="modal-footer bg-light">
-			  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${noBtnLabel}</button>
-			  <button type="button" class="btn btn-primary modal-success-btn">${yesBtnLabel}</button>
-			</div>
+			
 		  </div>
 		</div>
 	  </div>
 	`;
-	
+
 	div.appendTo(modalWrap.querySelector('.modal-body'));
 	var modal = new bootstrap.Modal(modalWrap.querySelector('.modal'));
 	modal.show();		
 
-	modalWrap.querySelector('.modal-success-btn').onclick  =  function(e){	
+	/*
+		Modal ın alt kısmına butonları kaymak istenirse aktif edilmeli ve
+		fonksiyona yesBtnLabel = 'Yes', noBtnLabel = 'Cancel' parametreleri eklenmesi
+
+		<div class="modal-footer bg-light">
+			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${noBtnLabel}</button>
+			<button type="button" class="btn btn-primary modal-success-btn">${yesBtnLabel}</button>
+		</div>
+
+		modalWrap.querySelector('.modal-success-btn').onclick  =  function(e){	
 		var sonuc = true;
 		if (typeof callback == "function")
 			sonuc = callback();		
 		if (sonuc)
 			modal.hide();
 	}; 
+	*/
   
   }
 
@@ -169,3 +177,19 @@ $(document).on('keyup', "input[type='search']", function(){
 	var oTable = $('.dataTable').dataTable();
 	oTable.fnFilter($(this).val());
 });
+
+function AjaxIslem(url, GetData, CallBackFunction, methot = 'GET')
+{	
+	$.ajax({
+		type : methot,
+		url : url,
+		data : GetData,
+		success : function (e) {
+			if (typeof CallBackFunction == "function")
+				CallBackFunction(e);
+			else
+				console.log(CallBackFunction);	
+		}
+	});
+
+}

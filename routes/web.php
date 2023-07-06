@@ -18,17 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/admin', function () {
-//         return view('admin.index');
-//     })->name('ana_sayfa');
-// });
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [MainController::class, 'index'])->name('ana_sayfa');
     Route::get('/admin/musteriler', [MainController::class, 'musteriler'])->name('musteriler');
+
+    Route::get('/get',function (\Illuminate\Http\Request $request){
+        $data = [$request->getData, $request->getData2];        
+        return response()->json(['data' => $data]);
+    })->name('get');
 });
