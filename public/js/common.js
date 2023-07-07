@@ -163,7 +163,7 @@ const ShowBSDialog = (divId, callback, tur = 0) =>
 function JsDataTable(tableId)
 {
 	var obj = {
-		paging: false,
+		paging: true,
 		autoWidth: false,
 		responsive:true,
 		processing: true,
