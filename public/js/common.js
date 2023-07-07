@@ -1,9 +1,3 @@
-$.ajaxSetup({
-	headers: {
-	  'X-CSSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	}
-});
-
 var COMMONLANG = {
 	DESC : 'Açıklama',
 	DELETE : 'Sil',
@@ -167,7 +161,37 @@ function JsDataTable(tableId)
 		responsive:true,
 		processing: true,
 		lengthMenu: [[5,10,25,50,100, -1], [5,10,25,50,100, "All"]],
-		info:false,
+		info:true,
+		"language": {
+            "emptyTable": "Gösterilecek ver yok.",
+            "processing": "Veriler yükleniyor",
+            "sDecimal": ".",
+            "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar",
+            "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+            "sInfoPostFix": "",
+            "sInfoThousands": ".",
+            "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+            "sLoadingRecords": "Yükleniyor...",
+            "sSearch": "Ara:",
+            "sZeroRecords": "Eşleşen kayıt bulunamadı",
+            "oPaginate": {
+                "sFirst": "İlk",
+                "sLast": "Son",
+                "sNext": "Sonraki",
+                "sPrevious": "Önceki"
+            },
+            "oAria": {
+                "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+            },
+            "select": {
+                "rows": {
+                    "_": "%d kayıt seçildi",
+                    "0": "",
+                    "1": "1 kayıt seçildi"
+                }
+            }
+        }
 	};
 	var table = $('#'+tableId).dataTable(obj);
 
