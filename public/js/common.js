@@ -96,7 +96,6 @@ const Modal_XLarge = 3;
 const Modal_FullScreen = 3;
 const Modal_DialogScrollable = 5;
 
-
 const ShowBSDialog = (divId, callback, tur = 0) => 
 {
 	if (modalWrap !== null) {
