@@ -200,20 +200,6 @@ function JsDataTable(tableId)
 	return table;
 }
 
-$(document).on("change", ".dataTables_length select", function(){
-	var selectedVal = $(this).val();
-});
-
-function LengthChange(tableId, obj)
-{
-	$('#'+tableId).dataTable().page.len($(obj).val()).draw();
-}
-
-$(document).on('keyup', "input[type='search']", function(){
-	var oTable = $('.dataTable').dataTable();
-	oTable.fnFilter($(this).val());
-});
-
 function AjaxIslem(url, GetData, CallBackFunction, methot = 'GET')
 {	
 	GetData._token = $('meta[name="csrf-token"]').attr('content');	
