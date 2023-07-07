@@ -167,19 +167,46 @@ function JsDataTable(tableId)
 		autoWidth: false,
 		responsive:true,
 		processing: true,
-		info:false
+		lengthMenu: [[5,10,25,50,100, -1], [5,10,25,50,100, "All"]],
+		info:false,
 	};
 	var table = $('#'+tableId).dataTable(obj);
 
 	var row = $('#'+tableId+'_wrapper').find('.row').first();
-	var div = $(row).find('div').end();
-	div.empty();
-	var searchInput = `<div id="`+tableId+`_filter"
-	 class='dataTables_filter'><input type='search' class='form-control form-control-sm' 
-	 style='width:100%;' aria-controls="`+tableId+`"/></div>`;
+	var div = $(row).find('div').first();
 
-	div.append(searchInput);
+	// lenght	
+	var tableWrapper = `<div class='text-white table_lenght' style='margin-bottom:0px; margin-top:6px; 
+							width:100%; background:#337ab7; padding:3px;'>
+							asd				
+						</div>`;
+	$('#'+tableId).parent('div').prepend(tableWrapper);
+	$('table.dataTable').attr('style','margin-top:0px !important');
+	
+	$('.table_lenght').append($('.dataTables_length'));
+	$('.dataTables_length').attr('style','float:right; padding:0px;');
+	$('.dataTables_length select').removeClass('form-select form-select-sm');
+	
+	div.remove();
+
+	// search input unu taşıdık
+	$('.dataTables_filter').parent('div').removeClass('col-md-6').addClass('col-md-12');
+	$('.dataTables_filter').addClass('d-flex bg-light');
+	$('.dataTables_filter').parent('div').append($('.dataTables_filter input'));
+	
+	// search input unu taşıdıktan sonra önceki divi sildik
+	$('.dataTables_filter').remove();
+
 	return table;
+}
+
+$(document).on("change", ".dataTables_length select", function(){
+	var selectedVal = $(this).val();
+});
+
+function LengthChange(tableId, obj)
+{
+	$('#'+tableId).dataTable().page.len($(obj).val()).draw();
 }
 
 $(document).on('keyup', "input[type='search']", function(){
