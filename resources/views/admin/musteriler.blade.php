@@ -147,7 +147,7 @@
         </section>
     </div>
 
-    <div id="YeniMusteri" title="Yeni Müşteri Kaydı">
+    <div id="YeniMusteri" title="Yeni Müşteri Kaydı" style="display: none;">
         <form id="contact-form" role="form">
             <div class="controls">
                 <div class="row">
@@ -226,7 +226,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <input type="submit" class="btn btn-success btn-send  pt-2 btn-block" value="Send Message">
+                        <input type="submit" class="btn btn-success btn-send  pt-2 btn-block" value="Kaydet">
                     </div>
                 </div>
             </div>
