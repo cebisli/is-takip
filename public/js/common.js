@@ -165,6 +165,9 @@ function JsDataTable(tableId)
 	var obj = {
 		paging: false,
 		autoWidth: false,
+		responsive:true,
+		processing: true,
+		info:false
 	};
 	var table = $('#'+tableId).dataTable(obj);
 

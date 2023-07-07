@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{{ asset('/') }}assets/css/pages/datatables.css">
     
     <script src="{{ asset('js/app.js') }}"></script>
-    
+    {{-- <script src="{{ asset('js/dataTable.js') }}"></script> --}}
 
     @yield('css')
 </head>

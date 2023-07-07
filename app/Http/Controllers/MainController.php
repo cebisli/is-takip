@@ -15,12 +15,13 @@ class MainController extends Controller
 
     function musteriler()
     {
-        return view('admin/musteriler');
+        $musteriler = Musteriler::orderBy('id')->get();
+        return view('admin/musteriler', compact('musteriler'));
     }
 
     function MusteriKaydet(Request $request)
     {
-        DB::table('musteriler')->insert([
+        Musteriler::create([
             "Unvan" => $request->Unvan,
             "YetkiliAdSoyad" => $request->YetkiliAdSoyad,
             "VergiNumarasi" => $request->VergiNumarasi,
@@ -32,7 +33,7 @@ class MainController extends Controller
             "Adres" => $request->Adres            
         ]);        
 
-        return response()->json(['success'=>'Laravel ajax example is being processed.']);
+        return response()->json(['success'=>'Müşteri Ekleme Başarılı']);
         // return redirect()->route('musteriler');
     }
 }
