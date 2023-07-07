@@ -1,3 +1,9 @@
+$.ajaxSetup({
+	headers: {
+	  'X-CSSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	}
+});
+
 var COMMONLANG = {
 	DESC : 'Açıklama',
 	DELETE : 'Sil',
@@ -115,7 +121,7 @@ const ShowBSDialog = (divId, callback, tur = 0) =>
 
 	modalWrap = document.createElement('div');
 	modalWrap.innerHTML = `
-	  <div class="modal fade" tabindex="-1" id="`+modalId+`">
+	  <div class="modal fade" tabindex="-1" id="`+modalId+`" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog `+modalClass+`">
 		  <div class="modal-content">
 			<div class="modal-header bg-light">
@@ -129,7 +135,7 @@ const ShowBSDialog = (divId, callback, tur = 0) =>
 		</div>
 	  </div>
 	`;
-
+	
 	div.appendTo(modalWrap.querySelector('.modal-body'));
 	var modal = new bootstrap.Modal(modalWrap.querySelector('.modal'));
 	modal.show();		
@@ -180,6 +186,8 @@ $(document).on('keyup', "input[type='search']", function(){
 
 function AjaxIslem(url, GetData, CallBackFunction, methot = 'GET')
 {	
+	GetData._token = $('meta[name="csrf-token"]').attr('content');	
+	
 	$.ajax({
 		type : methot,
 		url : url,

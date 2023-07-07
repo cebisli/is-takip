@@ -22,8 +22,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [MainController::class, 'index'])->name('ana_sayfa');
     Route::get('/admin/musteriler', [MainController::class, 'musteriler'])->name('musteriler');
 
-    Route::get('/get',function (\Illuminate\Http\Request $request){
-        $data = [$request->getData, $request->getData2];        
-        return response()->json(['data' => $data]);
-    })->name('get');
+    Route::post('/admin/musteriler', [MainController::class, 'MusteriKaydet'])->name('musteri_kaydet');
 });

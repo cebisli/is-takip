@@ -148,21 +148,22 @@
     </div>
 
     <div id="YeniMusteri" title="Yeni Müşteri Kaydı" style="display: none;">
-        <form id="contact-form" role="form">
+        {{-- <form id="YeniMusteriForm" role="form">
+            @csrf --}}
             <div class="controls">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="form_name">Şirket Adı *</label>
-                            <input id="form_name" type="text" name="Unvan" class="form-control"
+                            <label for="Unvan">Şirket Adı *</label>
+                            <input id="Unvan" type="text" name="Unvan" class="form-control"
                                 placeholder="Lütfen şirket adını giriniz *" required="required">
 
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="form_lastname">Yetkili *</label>
-                            <input id="form_lastname" type="text" name="YetkiliAdSoyad" class="form-control"
+                            <label for="YetkiliAdSoyad">Yetkili *</label>
+                            <input id="YetkiliAdSoyad" type="text" name="YetkiliAdSoyad" class="form-control"
                                 placeholder="Lütfen şirket yetlisinin adını soyadını giriniz *" required="required">
                         </div>
                     </div>
@@ -170,16 +171,16 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="form_name">Vergi Numarası *</label>
-                            <input id="form_name" type="text" name="VergiNumarasi" class="form-control"
+                            <label for="VergiNumarasi">Vergi Numarası *</label>
+                            <input id="VergiNumarasi" type="text" name="VergiNumarasi" class="form-control"
                                 placeholder="Lütfen vergi numarasını giriniz *" required="required">
 
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="form_lastname">Vergi Dairesi</label>
-                            <input id="form_lastname" type="text" name="VergiDairesi" class="form-control"
+                            <label for="VergiDairesi">Vergi Dairesi</label>
+                            <input id="VergiDairesi" type="text" name="VergiDairesi" class="form-control"
                                 placeholder="Lütfen vergi dairesini giriniz">
                         </div>
                     </div>
@@ -187,15 +188,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="form_lastname">Telefon *</label>
-                            <input id="form_lastname" type="text" name="Telefon" class="form-control"
+                            <label for="Telefon">Telefon *</label>
+                            <input id="Telefon" type="text" name="Telefon" class="form-control"
                                 placeholder="Lütfen şirket telefonunu giriniz *" required="required">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="form_email">Email *</label>
-                            <input id="form_email" type="email" name="EMail" class="form-control"
+                            <label for="EMail">Email *</label>
+                            <input id="EMail" type="email" name="EMail" class="form-control"
                                 placeholder="Please email adresini giriniz *" required="required">
                         </div>
                     </div>                   
@@ -203,15 +204,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="form_lastname">İL *</label>
-                            <input id="form_lastname" type="text" name="Il" class="form-control"
+                            <label for="Il">İL *</label>
+                            <input id="Il" type="text" name="Il" class="form-control"
                                 placeholder="Lütfen şirket telefonunu giriniz *" required="required">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="form_email">İlçe *</label>
-                            <input id="form_email" type="email" name="Ilce" class="form-control"
+                            <label for="Ilce">İlçe *</label>
+                            <input id="Ilce" type="text" name="Ilce" class="form-control"
                                 placeholder="Please email adresini giriniz *" required="required">
                         </div>
                     </div>                   
@@ -220,17 +221,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="form_message">Adres *</label>
-                            <textarea id="form_message" name="Adres" class="form-control"
+                            <label for="Adres">Adres *</label>
+                            <textarea id="Adres" name="Adres" class="form-control"
                                 placeholder="Şirket Adresi" rows="4"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <input type="submit" class="btn btn-success btn-send  pt-2 btn-block" value="Kaydet">
+                        <input type="submit" class="btn btn-success btn-send  pt-2 btn-block modal-success-btn" value="Kaydet" id="MusteriKaydet">
                     </div>
                 </div>
             </div>
-        </form>
+        {{-- </form> --}}
     </div>
 @endsection
 @section('js')
@@ -241,19 +242,23 @@
 
         function YeniMusteri() {
             ShowBSDialog('YeniMusteri', null, Modal_Large);
-        }
+        }        
 
-        $(".getButton").click(function() {
-            var getData1 = $(".getInput").val();
-            var getData2 = $(".getInput2").val();
+        $("#MusteriKaydet").click(function() {          
+            var obj = { };
+            obj.Unvan = $('#Unvan').val();
+            obj.YetkiliAdSoyad = $('#YetkiliAdSoyad').val();
+            obj.VergiNumarasi = $('#VergiNumarasi').val();
+            obj.VergiDairesi = $('#VergiDairesi').val();
+            obj.Telefon = $('#Telefon').val();
+            obj.EMail = $('#EMail').val();
+            obj.Il = $('#Il').val();
+            obj.Ilce = $('#Ilce').val();
+            obj.Adres = $('#Adres').val();
 
-            var obj = {};
-            obj.getData = getData1;
-            obj.getData2 = getData2;
-
-            AjaxIslem("{{ route('get') }}", obj, function(e) {
-                console.log(e);
-            });
+            AjaxIslem("{{ route('musteri_kaydet') }}", obj, function(e) {
+                ShowInfo(e.success);
+            }, 'POST');
         });
     </script>
 @endsection
