@@ -1,3 +1,10 @@
+$.ajaxSetup(
+{
+	headers: {
+		'X-CSSRF_TOKEN' : $('meta[name="csrf-token"]').attr('content')
+	}
+});
+
 var COMMONLANG = {
 	DESC : 'Açıklama',
 	DELETE : 'Sil',
@@ -44,9 +51,19 @@ UseSwalV2 = false;
 function ShowInfo (msg, okCallback)
 {
 	CallSwal({
-		title: 'İnfo',
+		title: 'Bilgilendirme',
 		text: msg,
         type: 'info',
+		confirmButtonText: 'Ok'
+		}, okCallback);
+};
+
+function ShowWarning (msg, okCallback)
+{
+	CallSwal({
+		title: 'Uyarı',
+		text: msg,
+        type: 'warning',
 		confirmButtonText: 'Ok'
 		}, okCallback);
 };
@@ -225,7 +242,8 @@ function JsDataTable(tableId)
 
 function AjaxIslem(url, GetData, CallBackFunction, methot = 'GET')
 {	
-	GetData._token = $('meta[name="csrf-token"]').attr('content');	
+	if (methot == 'POST')
+		GetData._token = $('meta[name="csrf-token"]').attr('content');	
 	
 	$.ajax({
 		type : methot,

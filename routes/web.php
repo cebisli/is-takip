@@ -23,4 +23,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/musteriler', [MainController::class, 'musteriler'])->name('musteriler');
 
     Route::post('/admin/musteriler', [MainController::class, 'MusteriKaydet'])->name('musteri_kaydet');
+    Route::get('/admin/musteriler/{id}', [MainController::class, 'MusteriBilgileri'])->name('musteri_bilgileri');
 });

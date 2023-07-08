@@ -24,11 +24,12 @@
                                 <colgroup>
                                     <col width="5%">
                                     <col width="20%">
-                                    <col width="25%">
+                                    <col width="20%">
                                     <col width="15%">
                                     <col width="15%">
                                     <col width="10%">
                                     <col width="10%">
+                                    <col width="5%">
                                 </colgroup>
                                 <thead class="table-light">
                                     <tr>
@@ -39,6 +40,7 @@
                                         <th>Vergi Dairesi</th>
                                         <th>İl</th>
                                         <th>İlçe</th>
+                                        <td>İşlemler</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,6 +53,10 @@
                                             <td>{{$musteri->VergiDairesi}}</td>
                                             <td>{{$musteri->Il}}</td>
                                             <td>{{$musteri->Ilce}}</td>
+                                            <td> 
+                                                <a class="btn btn-sm btn-warning" onclick="KayitDuzenle({{$musteri->id}})"><i class="fa fa-pen"></i></a>
+                                                <a href=" # " class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>    
+                                            </td>
                                         </tr>
                                     @endforeach                                
                                 </tbody>
@@ -64,8 +70,6 @@
     </div>
 
     <div id="YeniMusteri" title="Yeni Müşteri Kaydı" style="display: none;">
-        {{-- <form id="YeniMusteriForm" role="form">
-            @csrf --}}
             <div class="controls">
                 <div class="row">
                     <div class="col-md-6">
@@ -111,25 +115,25 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="EMail">Email *</label>
+                            <label for="EMail">Email</label>
                             <input id="EMail" type="email" name="EMail" class="form-control"
-                                placeholder="Please email adresini giriniz *" required="required">
+                                placeholder="Lütfen email adresini giriniz">
                         </div>
                     </div>                   
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Il">İL *</label>
+                            <label for="Il">İL</label>
                             <input id="Il" type="text" name="Il" class="form-control"
-                                placeholder="Lütfen şirket telefonunu giriniz *" required="required">
+                                placeholder="Lütfen ili giriniz">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="Ilce">İlçe *</label>
+                            <label for="Ilce">İlçe</label>
                             <input id="Ilce" type="text" name="Ilce" class="form-control"
-                                placeholder="Please email adresini giriniz *" required="required">
+                                placeholder="Lütfen ilçeyi giriniz">
                         </div>
                     </div>                   
                 </div>
@@ -137,7 +141,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="Adres">Adres *</label>
+                            <label for="Adres">Adres</label>
                             <textarea id="Adres" name="Adres" class="form-control"
                                 placeholder="Şirket Adresi" rows="4"></textarea>
                         </div>
@@ -147,7 +151,6 @@
                     </div>
                 </div>
             </div>
-        {{-- </form> --}}
     </div>
 @endsection
 @section('js')
@@ -160,23 +163,38 @@
             ShowBSDialog('YeniMusteri', null, Modal_Large);
         }        
 
-        $("#MusteriKaydet").click(function() {          
+        $("#MusteriKaydet").click(function() {     
+            var alanlar = ['Unvan', 'YetkiliAdSoyad', 'VergiNumarasi', 'VergiDairesi','Telefon','EMail','Il','Ilce','Adres'];     
             var obj = { };
-            obj.Unvan = $('#Unvan').val();
-            obj.YetkiliAdSoyad = $('#YetkiliAdSoyad').val();
-            obj.VergiNumarasi = $('#VergiNumarasi').val();
-            obj.VergiDairesi = $('#VergiDairesi').val();
-            obj.Telefon = $('#Telefon').val();
-            obj.EMail = $('#EMail').val();
-            obj.Il = $('#Il').val();
-            obj.Ilce = $('#Ilce').val();
-            obj.Adres = $('#Adres').val();
 
-            AjaxIslem("{{ route('musteri_kaydet') }}", obj, function(e) {                
+            var doldurulmayanAlanVarMi = '';
+            for (var i = 0; i<alanlar.length; i++)
+            {
+                var inp = $('#'+alanlar[i]);
+                var val =  inp.val();
+                if ((val == '' || typeof val == 'undefined') && inp.attr('required'))
+                {
+                    doldurulmayanAlanVarMi = inp.attr('placeholder');
+                    break;
+                }
+                obj[alanlar[i]] = val;
+            }
+            if (doldurulmayanAlanVarMi != '')
+                return ShowWarning(doldurulmayanAlanVarMi);
+            
+            AjaxIslem("{{ route('musteri_kaydet') }}", obj, function(e) { 
+                $(this).prop('disabled',true);              
                 ShowInfo(e.success, function(){ 
                     location.reload(); // sayfayı yenile
                 });
             }, 'POST');
         });
+
+        function KayitDuzenle(Id)
+        {
+            AjaxIslem("{{ route('musteri_bilgileri', "Id") }}", null, function(e) { 
+               console.log(e);
+            });
+        }
     </script>
 @endsection

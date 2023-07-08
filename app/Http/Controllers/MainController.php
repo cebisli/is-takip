@@ -36,4 +36,10 @@ class MainController extends Controller
         return response()->json(['success'=>'Müşteri Ekleme Başarılı']);
         // return redirect()->route('musteriler');
     }
+
+    function MusteriBilgileri($id)
+    {
+        return $id;
+        return response()->json($musteri);
+    }
 }
