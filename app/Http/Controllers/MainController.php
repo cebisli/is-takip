@@ -39,7 +39,14 @@ class MainController extends Controller
 
     function MusteriBilgileri($id)
     {
-        return $id;
-        return response()->json($musteri);
+        $musteri = Musteriler::whereId($id)->first();
+        return response()->json(['success' => true, 'musteri'   => $musteri]);
+    }
+
+    function MusteriGuncelle(Request $request, $id)
+    {
+        $musteri = Musteriler::whereId($id)->first() ?? abort(404, 'Müşteri Bulunamadı');
+        $musteri->update($request->all());
+        return response()->json(['success'=>"Güncelleme Başarılı"]);
     }
 }

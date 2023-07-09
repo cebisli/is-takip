@@ -181,19 +181,37 @@
             }
             if (doldurulmayanAlanVarMi != '')
                 return ShowWarning(doldurulmayanAlanVarMi);
-            
-            AjaxIslem("{{ route('musteri_kaydet') }}", obj, function(e) { 
+
+            var musteriId = $('#MusteriId').val();
+            var cb = function(e) { 
                 $(this).prop('disabled',true);              
                 ShowInfo(e.success, function(){ 
                     location.reload(); // sayfayı yenile
                 });
-            }, 'POST');
+            };
+
+            if (musteriId > 0)            
+                AjaxIslem("/admin/musteriler/"+musteriId, obj, cb, 'POST');
+            else
+                AjaxIslem("{{  route('musteri_kaydet') }}", obj, cb, 'POST');
+
+            $("#YeniMusteri").find('#MusteriId').remove();
         });
 
         function KayitDuzenle(Id)
         {
-            AjaxIslem("{{ route('musteri_bilgileri', "Id") }}", null, function(e) { 
-               console.log(e);
+            AjaxIslem("/admin/musteriler/"+Id, null, function(e) { 
+                if (e.success)
+                {
+                    for (const property in e.musteri) {
+                        $('#'+property).val(e.musteri[property]);                        
+                    }
+                    $('#YeniMusteri').attr('title','Müşteri Düzenle');
+                    $("#MusteriKaydet").val('Güncelle');
+                    $("#YeniMusteri").find('#MusteriId').remove();
+                    $("#YeniMusteri").prepend('<input type="hidden" value="'+Id+'" id="MusteriId">');
+                    ShowBSDialog('YeniMusteri', null, Modal_Large);
+                }
             });
         }
     </script>
