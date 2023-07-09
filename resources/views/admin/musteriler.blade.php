@@ -203,9 +203,9 @@
             AjaxIslem("/admin/musteriler/"+Id, null, function(e) { 
                 if (e.success)
                 {
-                    for (const property in e.musteri) {
-                        $('#'+property).val(e.musteri[property]);                        
-                    }
+                    for (const property in e.musteri) 
+                         $('#'+property).val(e.musteri[property]);                        
+                         
                     $('#YeniMusteri').attr('title','Müşteri Düzenle');
                     $("#MusteriKaydet").val('Güncelle');
                     $("#YeniMusteri").find('#MusteriId').remove();
