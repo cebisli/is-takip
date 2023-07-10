@@ -55,7 +55,7 @@
                                             <td>{{$musteri->Ilce}}</td>
                                             <td> 
                                                 <a class="btn btn-sm btn-warning" onclick="KayitDuzenle({{$musteri->id}})"><i class="fa fa-pen"></i></a>
-                                                <a href=" # " class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>    
+                                                <a href=" {{route('musteri_function', ['delete', $musteri->id] )}} " class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>    
                                             </td>
                                         </tr>
                                     @endforeach                                
@@ -200,7 +200,7 @@
 
         function KayitDuzenle(Id)
         {
-            AjaxIslem("/admin/musteriler/"+Id, null, function(e) { 
+            AjaxIslem("/admin/musteriler/show/"+Id, null, function(e) {                 
                 if (e.success)
                 {
                     for (const property in e.musteri) 

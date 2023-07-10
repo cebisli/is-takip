@@ -49,4 +49,19 @@ class MainController extends Controller
         $musteri->update($request->all());
         return response()->json(['success'=>"Güncelleme Başarılı"]);
     }
+    function MusteriSil($id)
+    {
+        $musteri = Musteriler::whereId($id)->first() ?? abort(404, 'Müşteri Bulunamadı');
+        $musteri->delete();
+        return redirect()->route('musteriler');
+    }
+
+
+    function MusteriGetFunction( $type = null, $id = null)
+    {        
+        if($type!=null && $type == 'delete')
+            return $this->MusteriSil($id);
+        if($type==null || $type == 'show')
+            return $this->MusteriBilgileri($id);
+    }
 }
