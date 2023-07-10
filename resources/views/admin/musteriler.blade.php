@@ -54,8 +54,8 @@
                                             <td>{{$musteri->Il}}</td>
                                             <td>{{$musteri->Ilce}}</td>
                                             <td> 
-                                                <a class="btn btn-sm btn-warning" onclick="KayitDuzenle({{$musteri->id}})"><i class="fa fa-pen"></i></a>
-                                                <a href=" {{route('musteri_function', ['delete', $musteri->id] )}} " class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>    
+                                                <a class="btn btn-sm btn-warning" title="Düzenle" onclick="KayitDuzenle({{$musteri->id}})"><i class="fa fa-pen"></i></a>
+                                                <a title="Müşteri Sil" href=" {{route('musteri_function', ['delete', $musteri->id] )}} " class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>    
                                             </td>
                                         </tr>
                                     @endforeach                                
@@ -159,8 +159,9 @@
             JsDataTable('Musteriler');
         });
 
-        function YeniMusteri() {
-            ShowBSDialog('YeniMusteri', null, Modal_Large);
+        function YeniMusteri() {            
+            inputSifirla();
+            ShowBSDialog('YeniMusteri', null, Modal_Large);    
         }        
 
         $("#MusteriKaydet").click(function() {     
@@ -195,7 +196,7 @@
             else
                 AjaxIslem("{{  route('musteri_kaydet') }}", obj, cb, 'POST');
 
-            $("#YeniMusteri").find('#MusteriId').remove();
+            $("#YeniMusteri").find('#MusteriId').remove();            
         });
 
         function KayitDuzenle(Id)
@@ -213,6 +214,17 @@
                     ShowBSDialog('YeniMusteri', null, Modal_Large);
                 }
             });
+        }
+
+        function inputSifirla()
+        {
+            var alanlar = ['Unvan', 'YetkiliAdSoyad', 'VergiNumarasi', 'VergiDairesi','Telefon','EMail','Il','Ilce','Adres'];     
+            for (var i = 0; i<alanlar.length; i++)            
+                $('#'+alanlar[i]).val('');
+
+            $('#YeniMusteri').attr('title','Yeni Müşteri');
+            $("#MusteriKaydet").val('Kaydet');   
+            $("#YeniMusteri").find('#MusteriId').remove(); 
         }
     </script>
 @endsection
