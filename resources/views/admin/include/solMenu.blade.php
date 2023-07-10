@@ -44,7 +44,7 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="extra-component-avatar.html">Kullanıcı Listesi</a>
+                            <a href="{{route('kullanicilar')}}">Kullanıcı Listesi</a>
                         </li>
                     </ul>
                 </li>
