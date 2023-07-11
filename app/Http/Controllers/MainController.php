@@ -61,7 +61,7 @@ class MainController extends Controller
     {        
         if($type!=null && $type == 'delete')
             return $this->MusteriSil($id);
-        if($type==null || $type == 'show')
+        if($type!=null && $type == 'show')
             return $this->MusteriBilgileri($id);
     }
 }

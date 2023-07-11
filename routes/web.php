@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/musteriler/{id}', [MainController::class, 'MusteriGuncelle'])->name('musteri_duzenle');
     
 
-    Route::get('/admin/users', [UserController::class, 'UsersGetFunctions'])->name('kullanicilar');
+    Route::get('/admin/users', [UserController::class, 'KullaniciListesi'])->name('kullanicilar');
+    Route::get('/admin/users/{type}/{id}', [UserController::class, 'KullaniciGetFunction'])->name('kullanici_function');
 
 });

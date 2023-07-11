@@ -14,16 +14,17 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <button class="btn btn-success btn-sm m-2 float-end" onclick="YeniMusteri()">Yeni Kullanıcı Ekle</button>
+                                <button class="btn btn-success btn-sm m-2 float-end" onclick="YeniKullanici()">Yeni Kullanıcı Ekle</button>
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table" id="Musteriler">                                
+                            <table class="table" id="Users">                                
                                 <thead class="table-light">
                                     <tr>
                                         <th>No</th>
                                         <th>Ad</th>
                                         <th>Email</th>
+                                        <th>İşlemler</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -32,10 +33,10 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->email}}</td>
-                                            {{-- <td> 
-                                                <a class="btn btn-sm btn-warning" title="Düzenle" onclick="KayitDuzenle({{$musteri->id}})"><i class="fa fa-pen"></i></a>
-                                                <a title="Müşteri Sil" href=" {{route('musteri_function', ['delete', $musteri->id] )}} " class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>    
-                                            </td> --}}
+                                            <td> 
+                                                <a class="btn btn-sm btn-warning" title="Düzenle" onclick="KayitDuzenle({{$user->id}})"><i class="fa fa-pen"></i></a>
+                                                <a title="Sil" class="btn btn-sm btn-danger" href=" {{route('kullanici_function', ['delete', $user->id] )}} "><i class="fa fa-times"></i></a>    
+                                            </td>
                                         </tr>
                                     @endforeach                                
                                 </tbody>
@@ -48,162 +49,101 @@
         </section>
     </div>
 
-    <div id="YeniMusteri" title="Yeni Müşteri Kaydı" style="display: none;">
+    <div id="YeniKullanici" title="Yeni Kullanıcı Kaydı" style="display: none;">
             <div class="controls">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Unvan">Şirket Adı *</label>
-                            <input id="Unvan" type="text" name="Unvan" class="form-control"
-                                placeholder="Lütfen şirket adını giriniz *" required="required">
-
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="YetkiliAdSoyad">Yetkili *</label>
-                            <input id="YetkiliAdSoyad" type="text" name="YetkiliAdSoyad" class="form-control"
-                                placeholder="Lütfen şirket yetlisinin adını soyadını giriniz *" required="required">
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="name">Kullanıcı Adı-Soyadı *</label>
+                    <input id="name" type="text" class="form-control"
+                        placeholder="Lütfen kullanıcı adını soyadını giriniz *" required="required">
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="VergiNumarasi">Vergi Numarası *</label>
-                            <input id="VergiNumarasi" type="text" name="VergiNumarasi" class="form-control"
-                                placeholder="Lütfen vergi numarasını giriniz *" required="required">
-
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="VergiDairesi">Vergi Dairesi</label>
-                            <input id="VergiDairesi" type="text" name="VergiDairesi" class="form-control"
-                                placeholder="Lütfen vergi dairesini giriniz">
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input id="email" type="email" class="form-control"
+                        placeholder="Lütfen email adresini giriniz">
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Telefon">Telefon *</label>
-                            <input id="Telefon" type="text" name="Telefon" class="form-control"
-                                placeholder="Lütfen şirket telefonunu giriniz *" required="required">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="EMail">Email</label>
-                            <input id="EMail" type="email" name="EMail" class="form-control"
-                                placeholder="Lütfen email adresini giriniz">
-                        </div>
-                    </div>                   
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Il">İL</label>
-                            <input id="Il" type="text" name="Il" class="form-control"
-                                placeholder="Lütfen ili giriniz">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Ilce">İlçe</label>
-                            <input id="Ilce" type="text" name="Ilce" class="form-control"
-                                placeholder="Lütfen ilçeyi giriniz">
-                        </div>
-                    </div>                   
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="Adres">Adres</label>
-                            <textarea id="Adres" name="Adres" class="form-control"
-                                placeholder="Şirket Adresi" rows="4"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <input type="submit" class="btn btn-success btn-send  pt-2 btn-block modal-success-btn" value="Kaydet" id="MusteriKaydet">
-                    </div>
-                </div>
+                <div class="form-group">
+                    <label for="password">Kullanıcı Parolası *</label>
+                    <input id="password" type="text" class="form-control"
+                        placeholder="Lütfen parola oluşturunuz *" required="required">
+                </div>                
+                <input type="submit" class="btn btn-success btn-send  pt-2 btn-block modal-success-btn" value="Kaydet" id="Kaydet">                
             </div>
     </div>
 @endsection
 @section('js')
     <script>
+        var tableId = "Users";
+        var ModalDivId = "YeniKullanici";
+        let alanlar = ['name', 'email', 'password'];
+
         $(function() {
-            JsDataTable('Musteriler');
+            JsDataTable(tableId);
         });
 
-        function YeniMusteri() {            
+        function YeniKullanici() {            
             inputSifirla();
-            ShowBSDialog('YeniMusteri', null, Modal_Large);    
+            ShowBSDialog(ModalDivId, null);    
         }        
 
-        $("#MusteriKaydet").click(function() {     
-            var alanlar = ['Unvan', 'YetkiliAdSoyad', 'VergiNumarasi', 'VergiDairesi','Telefon','EMail','Il','Ilce','Adres'];     
-            var obj = { };
+        // $("#Kaydet").click(function() {        
+        //     var obj = { };
 
-            var doldurulmayanAlanVarMi = '';
-            for (var i = 0; i<alanlar.length; i++)
-            {
-                var inp = $('#'+alanlar[i]);
-                var val =  inp.val();
-                if ((val == '' || typeof val == 'undefined') && inp.attr('required'))
-                {
-                    doldurulmayanAlanVarMi = inp.attr('placeholder');
-                    break;
-                }
-                obj[alanlar[i]] = val;
-            }
-            if (doldurulmayanAlanVarMi != '')
-                return ShowWarning(doldurulmayanAlanVarMi);
+        //     var doldurulmayanAlanVarMi = '';
+        //     for (var i = 0; i<alanlar.length; i++)
+        //     {
+        //         var inp = $('#'+alanlar[i]);
+        //         var val =  inp.val();
+        //         if ((val == '' || typeof val == 'undefined') && inp.attr('required'))
+        //         {
+        //             doldurulmayanAlanVarMi = inp.attr('placeholder');
+        //             break;
+        //         }
+        //         obj[alanlar[i]] = val;
+        //     }
+        //     if (doldurulmayanAlanVarMi != '')
+        //         return ShowWarning(doldurulmayanAlanVarMi);
 
-            var musteriId = $('#MusteriId').val();
-            var cb = function(e) { 
-                $(this).prop('disabled',true);              
-                ShowInfo(e.success, function(){ 
-                    location.reload(); // sayfayı yenile
-                });
-            };
+        //     var musteriId = $('#DetayId').val();
+        //     var cb = function(e) { 
+        //         $(this).prop('disabled',true);              
+        //         ShowInfo(e.success, function(){ 
+        //             location.reload(); // sayfayı yenile
+        //         });
+        //     };
 
-            if (musteriId > 0)            
-                AjaxIslem("/admin/musteriler/"+musteriId, obj, cb, 'POST');
-            else
-                AjaxIslem("{{  route('musteri_kaydet') }}", obj, cb, 'POST');
+        //     if (musteriId > 0)            
+        //         AjaxIslem("/admin/users/"+musteriId, obj, cb, 'POST');
+        //     else
+        //         AjaxIslem("{{  route('musteri_kaydet') }}", obj, cb, 'POST');
 
-            $("#YeniMusteri").find('#MusteriId').remove();            
-        });
+        //     $("#"+ModalDivId).find('#DetayId').remove();            
+        // });
 
         function KayitDuzenle(Id)
         {
-            AjaxIslem("/admin/musteriler/show/"+Id, null, function(e) {                 
+            AjaxIslem("/admin/users/show/"+Id, null, function(e) {                 
                 if (e.success)
                 {
-                    for (const property in e.musteri) 
-                         $('#'+property).val(e.musteri[property]);                        
+                    for (const property in e.obj) 
+                         $('#'+property).val(e.obj[property]);                        
                          
-                    $('#YeniMusteri').attr('title','Müşteri Düzenle');
-                    $("#MusteriKaydet").val('Güncelle');
-                    $("#YeniMusteri").find('#MusteriId').remove();
-                    $("#YeniMusteri").prepend('<input type="hidden" value="'+Id+'" id="MusteriId">');
-                    ShowBSDialog('YeniMusteri', null, Modal_Large);
+                    $('#'+ModalDivId).attr('title','Müşteri Düzenle');
+                    $("#Kaydet").val('Güncelle');
+                    $('#'+ModalDivId).find('#MusteriId').remove();
+                    $('#'+ModalDivId).prepend('<input type="hidden" value="'+Id+'" id="DetayId">');
+                    ShowBSDialog(ModalDivId, null, Modal_Large);
                 }
             });
         }
 
         function inputSifirla()
-        {
-            var alanlar = ['Unvan', 'YetkiliAdSoyad', 'VergiNumarasi', 'VergiDairesi','Telefon','EMail','Il','Ilce','Adres'];     
+        {                 
             for (var i = 0; i<alanlar.length; i++)            
                 $('#'+alanlar[i]).val('');
 
-            $('#YeniMusteri').attr('title','Yeni Müşteri');
-            $("#MusteriKaydet").val('Kaydet');   
-            $("#YeniMusteri").find('#MusteriId').remove(); 
+            $('#'+ModalDivId).attr('title','Yeni Kullanıcı');
+            $("#Kaydet").val('Kaydet');   
+            $("#"+ModalDivId).find('#MusteriId').remove(); 
         }
     </script>
 @endsection
