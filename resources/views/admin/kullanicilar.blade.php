@@ -17,6 +17,7 @@
                                 <button class="btn btn-success btn-sm m-2 float-end" onclick="YeniKullanici()">Yeni Kullanıcı Ekle</button>
                             </div>
                         </div>
+                        {{$users}}
                         <div class="table-responsive">
                             <table class="table" id="Users">                                
                                 <thead class="table-light">
@@ -125,7 +126,7 @@
                 if (e.success)
                 {
                     for (const property in e.obj) 
-                         $('#'+property).val(e.obj[property]);                        
+                        $('#'+property).val(e.obj[property]);                        
                          
                     $('#'+ModalDivId).attr('title','Müşteri Düzenle');
                     $("#Kaydet").val('Güncelle');
