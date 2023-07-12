@@ -17,7 +17,6 @@
                                 <button class="btn btn-success btn-sm m-2 float-end" onclick="YeniKullanici()">Yeni Kullanıcı Ekle</button>
                             </div>
                         </div>
-                        {{$users}}
                         <div class="table-responsive">
                             <table class="table" id="Users">                                
                                 <thead class="table-light">
@@ -36,7 +35,7 @@
                                             <td>{{$user->email}}</td>
                                             <td> 
                                                 <a class="btn btn-sm btn-warning" title="Düzenle" onclick="KayitDuzenle({{$user->id}})"><i class="fa fa-pen"></i></a>
-                                                <a title="Sil" class="btn btn-sm btn-danger" href=" {{route('kullanici_function', ['delete', $user->id] )}} "><i class="fa fa-times"></i></a>    
+                                                <a title="Sil" class="btn btn-sm btn-danger" href="/admin/users/delete/{{$user->id}}" ><i class="fa fa-times"></i></a>    
                                             </td>
                                         </tr>
                                     @endforeach                                
@@ -60,11 +59,11 @@
                 <div class="form-group">
                     <label for="email">Email *</label>
                     <input id="email" type="email" class="form-control"
-                        placeholder="Lütfen email adresini giriniz">
+                        placeholder="Lütfen kullanıcının email adresini giriniz" required="required">
                 </div>
                 <div class="form-group">
-                    <label for="password">Kullanıcı Parolası *</label>
-                    <input id="password" type="text" class="form-control"
+                    <label for="pass_1">Kullanıcı Parolası *</label>
+                    <input id="pass_1" type="text" class="form-control"
                         placeholder="Lütfen parola oluşturunuz *" required="required">
                 </div>                
                 <input type="submit" class="btn btn-success btn-send  pt-2 btn-block modal-success-btn" value="Kaydet" id="Kaydet">                
@@ -75,7 +74,7 @@
     <script>
         var tableId = "Users";
         var ModalDivId = "YeniKullanici";
-        let alanlar = ['name', 'email', 'password'];
+        let alanlar = ['name', 'email', 'pass_1'];
 
         $(function() {
             JsDataTable(tableId);
@@ -86,39 +85,40 @@
             ShowBSDialog(ModalDivId, null);    
         }        
 
-        // $("#Kaydet").click(function() {        
-        //     var obj = { };
+        $("#Kaydet").click(function() {        
+            var obj = { };
 
-        //     var doldurulmayanAlanVarMi = '';
-        //     for (var i = 0; i<alanlar.length; i++)
-        //     {
-        //         var inp = $('#'+alanlar[i]);
-        //         var val =  inp.val();
-        //         if ((val == '' || typeof val == 'undefined') && inp.attr('required'))
-        //         {
-        //             doldurulmayanAlanVarMi = inp.attr('placeholder');
-        //             break;
-        //         }
-        //         obj[alanlar[i]] = val;
-        //     }
-        //     if (doldurulmayanAlanVarMi != '')
-        //         return ShowWarning(doldurulmayanAlanVarMi);
+            var doldurulmayanAlanVarMi = '';
+            for (var i = 0; i<alanlar.length; i++)
+            {
+                var inp = $('#'+alanlar[i]);
+                var val =  inp.val();
+                if ((val == '' || typeof val == 'undefined') && inp.attr('required'))
+                {
+                    doldurulmayanAlanVarMi = inp.attr('placeholder');
+                    break;
+                }
+                obj[alanlar[i]] = val;
+            }
+            if (doldurulmayanAlanVarMi != '')
+                return ShowWarning(doldurulmayanAlanVarMi);
 
-        //     var musteriId = $('#DetayId').val();
-        //     var cb = function(e) { 
-        //         $(this).prop('disabled',true);              
-        //         ShowInfo(e.success, function(){ 
-        //             location.reload(); // sayfayı yenile
-        //         });
-        //     };
+            var musteriId =  0;    
+            // var musteriId = $('#DetayId').val();
+            var cb = function(e) {
+                $(this).prop('disabled',true);              
+                ShowInfo(e.success, function(){ 
+                    location.reload(); // sayfayı yenile
+                });
+            };
 
-        //     if (musteriId > 0)            
-        //         AjaxIslem("/admin/users/"+musteriId, obj, cb, 'POST');
-        //     else
-        //         AjaxIslem("{{  route('musteri_kaydet') }}", obj, cb, 'POST');
+            if (musteriId > 0)            
+                AjaxIslem("/admin/users/"+musteriId, obj, cb, 'POST');
+            else
+                AjaxIslem("{{  route('user_kaydet') }}", obj, cb, 'POST');
 
-        //     $("#"+ModalDivId).find('#DetayId').remove();            
-        // });
+            $("#"+ModalDivId).find('#DetayId').remove();            
+        });
 
         function KayitDuzenle(Id)
         {
@@ -130,7 +130,7 @@
                          
                     $('#'+ModalDivId).attr('title','Müşteri Düzenle');
                     $("#Kaydet").val('Güncelle');
-                    $('#'+ModalDivId).find('#MusteriId').remove();
+                    $('#'+ModalDivId).find('#DetayId').remove();
                     $('#'+ModalDivId).prepend('<input type="hidden" value="'+Id+'" id="DetayId">');
                     ShowBSDialog(ModalDivId, null, Modal_Large);
                 }

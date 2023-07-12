@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'email' => "ikram@hotmail.com",
             'email_verified_at' => now(),
             'password' => '$2y$10$JJrUBIp7b3k9stPpkTJ6.egFIeZxAXdJc4evZQhNXe.1nam2seyt.', // 123456789
+            'pass_1' => '123456789',
             'remember_token' => Str::random(10),
             'type' => 'admin',
         ]);
