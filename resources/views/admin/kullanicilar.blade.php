@@ -103,8 +103,7 @@
             if (doldurulmayanAlanVarMi != '')
                 return ShowWarning(doldurulmayanAlanVarMi);
 
-            var musteriId =  0;    
-            // var musteriId = $('#DetayId').val();
+            var musteriId = $('#DetayId').val();
             var cb = function(e) {
                 $(this).prop('disabled',true);              
                 ShowInfo(e.success, function(){ 

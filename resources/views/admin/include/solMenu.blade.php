@@ -16,6 +16,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item active ">
@@ -23,31 +24,31 @@
                         <i class="bi bi-grid-fill"></i>
                         <span>Ana Sayfa</span>
                     </a>
-                </li>
-
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
-                        <span>Müşteriler</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{route('musteriler')}}">Müşteri Listesi</a>
-                        </li>                        
-                    </ul>
-                </li>
-
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-collection-fill"></i>
-                        <span>Kullanıcılar</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{route('kullanicilar')}}">Kullanıcı Listesi</a>
-                        </li>
-                    </ul>
-                </li>
+                </li>                
+                @if (Auth::user()->type == 'admin')
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-stack"></i>
+                            <span>Müşteriler</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="{{route('musteriler')}}">Müşteri Listesi</a>
+                            </li>                        
+                        </ul>
+                    </li>
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-collection-fill"></i>
+                            <span>Kullanıcılar</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="{{route('kullanicilar')}}">Kullanıcı Listesi</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif                
 
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>

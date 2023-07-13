@@ -49,4 +49,16 @@ class UserController extends Controller
 
         return response()->json(['success'=>'Kullanıcı Ekleme Başarılı']);
     }
+
+    function UserGuncelle(Request $request, $id)
+    {
+        $user = User::whereId($id)->first() ?? abort(404, 'Müşteri Bulunamadı');
+        $user->update([
+            "name" => $request->name,
+            "email" => $request->email,
+            'password' => Hash::make($request->pass_1),
+            "pass_1" => $request->pass_1
+        ]);
+        return response()->json(['success'=>"Güncelleme Başarılı"]);
+    }
 }
