@@ -24,6 +24,17 @@
                         <i class="bi bi-grid-fill"></i>
                         <span>Ana Sayfa</span>
                     </a>
+                </li>
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-collection-fill"></i>
+                        <span>İş Yönetimi</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{route('is_listesi')}}">Kullanıcı Listesi</a>
+                        </li>
+                    </ul>
                 </li>                
                 @if (Auth::user()->type == 'admin')
                     <li class="sidebar-item  has-sub">
@@ -49,7 +60,7 @@
                         </ul>
                     </li>
                 @endif                
-
+                    
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
