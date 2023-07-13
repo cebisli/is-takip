@@ -16,13 +16,15 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::user())
+        return view('admin/index');
+    return view('/welcome');
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [MainController::class, 'index'])->name('ana_sayfa');
-    Route::get('/admin/musteriler', [MainController::class, 'musteriler'])->name('musteriler');
 
+    Route::get('/admin/musteriler', [MainController::class, 'musteriler'])->name('musteriler');
     Route::get('/admin/musteriler/{type}/{id}', [MainController::class, 'MusteriGetFunction'])->name('musteri_function');
     Route::post('/admin/musteriler', [MainController::class, 'MusteriKaydet'])->name('musteri_kaydet');    
     Route::post('/admin/musteriler/{id}', [MainController::class, 'MusteriGuncelle'])->name('musteri_duzenle');
