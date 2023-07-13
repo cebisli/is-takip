@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Isler;
+use Illuminate\Support\Str;
 
 class IsTakipController extends Controller
 {
@@ -13,7 +16,8 @@ class IsTakipController extends Controller
      */
     public function index()
     {
-        //
+        $isler = Isler::all();
+        return view('admin.is_takip_list', compact('isler'));
     }
 
     /**

@@ -32,7 +32,7 @@
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
-                            <a href="{{route('is_listesi')}}">Kullanıcı Listesi</a>
+                            <a href="{{route('is_takip.index')}}">Kullanıcı Listesi</a>
                         </li>
                     </ul>
                 </li>                
