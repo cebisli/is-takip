@@ -217,7 +217,7 @@ function JsDataTable(tableId)
 
 	// lenght	
 	var tableWrapper = `<div class='text-white table_lenght' style='margin-bottom:0px; margin-top:6px; 
-							width:100%; background:#337ab7; padding:3px;'>
+							width:100%; background:#337ab7; padding:3px; border-radius:3px;'>
 							asd				
 						</div>`;
 	$('#'+tableId).parent('div').prepend(tableWrapper);
