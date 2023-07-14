@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table" id="Users">                                
+                            <table class="table table-striped table-hover" id="Users">                                
                                 <thead class="table-light">
                                     <tr>
                                         <th>No</th>

@@ -30,3 +30,7 @@ footer {
 table.dataTable tbody td {
 	padding: 3px 3px; 
 }
+
+tbody, td, tfoot, th, thead, tr {
+    border: none;
+}

@@ -177,8 +177,8 @@ function JsDataTable(tableId)
 		autoWidth: false,
 		responsive:true,
 		processing: true,
-		lengthMenu: [[5,10,25,50,100, -1], [5,10,25,50,100, "All"]],
-		info:true,
+		lengthMenu: [[5,10,25,50,100, -1], [5,10,25,50,100, "All"]],		
+		info:true,		
 		"language": {
             "emptyTable": "Gösterilecek ver yok.",
             "processing": "Veriler yükleniyor",
@@ -207,8 +207,12 @@ function JsDataTable(tableId)
                     "0": "",
                     "1": "1 kayıt seçildi"
                 }
-            }
-        }
+            }			
+        },
+		dom: 'lBfrtip',
+		buttons: [
+			'excel', 'csv', 'pdf'
+		],
 	};
 	var table = $('#'+tableId).dataTable(obj);
 
@@ -216,26 +220,36 @@ function JsDataTable(tableId)
 	var div = $(row).find('div').first();
 
 	// lenght	
-	var tableWrapper = `<div class='text-white table_lenght' style='margin-bottom:0px; margin-top:6px; 
-							width:100%; background:#337ab7; padding:3px; border-radius:3px;'>
-							asd				
+	var tableWrapper = `<div class='text-white table_lenght' 
+								style='width:100%; background:#337ab7; 
+								border-radius:3px; height:40px; position:relative;'>									
 						</div>`;
 	$('#'+tableId).parent('div').prepend(tableWrapper);
 	$('table.dataTable').attr('style','margin-top:0px !important');
 	
 	$('.table_lenght').append($('.dataTables_length'));
-	$('.dataTables_length').attr('style','float:right; padding:0px;');
+	$('.dataTables_length').attr('style','color:white; position:absolute; top:20%; right:5px;');
 	$('.dataTables_length select').removeClass('form-select form-select-sm');
 	
-	div.remove();
+	$('.table_lenght').append($('.dt-buttons'));
+	$(".dt-buttons").css({'position':'absolute','top':'12%', 'margin-left':'20px'});
+	var dtCss = {
+		'color':'white',
+		'padding':'0.2em 1.5em 0.2em',
+		'height':'10px !important', 
+		'margin-right':'0px',
+		'background-image':"none",
+		'background-color':'#5bc0de',
+		'border-radius':'3px',
+		'border-color':'#46b8da'
+	}
+	$(".dt-button").css(dtCss);	
 
-	// search input unu taşıdık
-	$('.dataTables_filter').parent('div').removeClass('col-md-6').addClass('col-md-12');
-	$('.dataTables_filter').addClass('d-flex bg-light');
-	$('.dataTables_filter').parent('div').append($('.dataTables_filter input'));
-	
-	// search input unu taşıdıktan sonra önceki divi sildik
-	$('.dataTables_filter').remove();
+	//search input unu taşıdık
+	$('.table_lenght').parent('div').prepend($('.dataTables_filter input'));	
+	$('.dataTables_wrapper input').css({'width':'100%', 'margin-bottom':'5px', 'border-radius':'3px'});
+	// // search input unu taşıdıktan sonra önceki divi sildik
+	 $('.dataTables_filter').remove();
 
 	return table;
 }

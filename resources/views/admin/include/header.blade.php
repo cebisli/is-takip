@@ -18,10 +18,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="{{ asset('/') }}assets/css/pages/fontawesome.css">
     <link rel="stylesheet" href="{{ asset('/') }}assets/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="{{ asset('/') }}assets/css/pages/datatables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/jq-2.1.4,jszip-2.5.0,pdfmake-0.1.18,dt-1.10.9,af-2.0.0,b-1.0.3,b-colvis-1.0.3,b-html5-1.0.3,b-print-1.0.3,se-1.0.1/datatables.min.css"/><link rel="stylesheet" href="{{ asset('/') }}assets/css/pages/datatables.css">    
     
-    <script src="{{ asset('js/app.js') }}"></script>
-    {{-- <script src="{{ asset('js/dataTable.js') }}"></script> --}}
+    <script src="{{ asset('js/app.js') }}"></script>    
 
     @yield('css')
 </head>
