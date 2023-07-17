@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Isler;
+use App\Models\Musteriler;
 use Illuminate\Support\Str;
 
 class IsTakipController extends Controller
@@ -17,10 +18,13 @@ class IsTakipController extends Controller
     public function index()
     {
         if (auth()->user()->type != 'admin')        
-            $isler = User::whereId(auth()->user()->id)->with('Islerim.musteri')->get();               
+            $isler = Isler::whereId(auth()->user()->id)->with('user','musteri')->get();
         else    
-            $isler = Isler::with('user','musteri')->get();                   
-        return view('admin.is_takip_list', compact('isler'));
+            $isler = Isler::with('user','musteri')->get();
+        
+        $kullanicilar = User::all();    
+        $musteriler = Musteriler::all();
+        return view('admin.is_takip_list', compact('isler','kullanicilar','musteriler'));
     }
 
     /**
@@ -62,8 +66,12 @@ class IsTakipController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {  
+        $isler = Isler::with('user','musteri')->find($id);
+        if ($isler)
+            return response()->json(['success' => true, 'obj'   => $isler]);
+        else
+            return response()->json(['success' => false, 'Kayıt Bulunamadı']);    
     }
 
     /**
