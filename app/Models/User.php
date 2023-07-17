@@ -59,4 +59,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function Islerim()
+    {
+        return $this->hasMany('App\Models\Isler')->where('user_id', auth()->user()->id);
+    }
 }

@@ -11,4 +11,15 @@ class Isler extends Model
 
     protected $fillable = ['id','user_id', 'musteri_id', 'baslik', 'aciklama', 'not', 'son_tarih'];
     protected $table = 'isler';
+
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function musteri()
+    {
+        return $this->belongsTo('App\Models\Musteriler');
+    }
 }

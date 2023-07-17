@@ -9,7 +9,7 @@
     </div>
     <div class="page-content">
         <section class="row">
-
+            {{$isler[0]}}
             <section class="section">
                 <div class="card">
                     <div class="card-body">
@@ -24,42 +24,30 @@
                                 <colgroup>
                                     <col width="5%">
                                     <col width="20%">
+                                    @if (auth()->user()->type == 'admin')
+                                        <col width="20%">
+                                    @endif
+                                    <col width="20%">
                                     <col width="20%">
                                     <col width="15%">
-                                    <col width="15%">
-                                    <col width="10%">
-                                    <col width="10%">
                                     <col width="5%">
                                 </colgroup>
                                 <thead class="table-light">
                                     <tr>
                                         <th>No</th>
+                                        <th>İş Başlık</th>
+                                        @if (auth()->user()->type == 'admin')
+                                            <th>Sahibi</th>    
+                                        @endif
                                         <th>Şirket Adı</th>
                                         <th>Şirket Yetkilisi</th>
-                                        <th>Vergi Numarası</th>
-                                        <th>Vergi Dairesi</th>
-                                        <th>İl</th>
-                                        <th>İlçe</th>
-                                        <td>İşlemler</td>
+                                        <th>Son Tarihi</th>
+                                        <th>İşlemler</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody>
-                                    @foreach ($isler as $is)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{$musteri->Unvan}}</td>
-                                            <td>{{$musteri->YetkiliAdSoyad}}</td>
-                                            <td>{{$musteri->VergiNumarasi}}</td>
-                                            <td>{{$musteri->VergiDairesi}}</td>
-                                            <td>{{$musteri->Il}}</td>
-                                            <td>{{$musteri->Ilce}}</td>
-                                            <td> 
-                                                <a class="btn btn-sm btn-warning" title="Düzenle" onclick="KayitDuzenle({{$musteri->id}})"><i class="fa fa-pen"></i></a>
-                                                <a title="Müşteri Sil" href=" {{route('musteri_function', ['delete', $musteri->id] )}} " class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>    
-                                            </td>
-                                        </tr>
-                                    @endforeach                                
-                                </tbody> --}}
+                                <tbody>
+                                                             
+                                </tbody>
                             </table>                            
                         </div>
                     </div>

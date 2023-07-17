@@ -16,7 +16,10 @@ class IsTakipController extends Controller
      */
     public function index()
     {
-        $isler = Isler::all();
+        if (auth()->user()->type != 'admin')        
+            $isler = User::whereId(auth()->user()->id)->with('Islerim.musteri')->get();               
+        else    
+            $isler = Isler::with('user','musteri')->get();                   
         return view('admin.is_takip_list', compact('isler'));
     }
 
