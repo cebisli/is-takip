@@ -20,6 +20,7 @@ class Isler extends Migration
             $table->string('baslik');
             $table->longText('aciklama');
             $table->longText('not');
+            $table->enum('durum', ['0','1'])->default('1');
             $table->timestamp('son_tarih');
             $table->timestamps();
 

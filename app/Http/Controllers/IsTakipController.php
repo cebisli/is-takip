@@ -18,7 +18,7 @@ class IsTakipController extends Controller
     public function index()
     {
         if (auth()->user()->type != 'admin')        
-            $isler = Isler::whereId(auth()->user()->id)->with('user','musteri')->get();
+            $isler = Isler::where('user_id',auth()->user()->id)->with('user','musteri')->get();
         else    
             $isler = Isler::with('user','musteri')->get();
         
@@ -45,7 +45,13 @@ class IsTakipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sonuc = Isler::create($request->all());        
+        if ($sonuc)
+            $mesaj = 'Yapılacak işler arasına eklenmiştir.';
+        else
+            $mesaj = 'Yapılacak işin eklenmesi sırasında hata ile karşılaşıldı...';    
+
+        return response()->json(['success'=>$mesaj]);
     }
 
     /**
@@ -83,7 +89,17 @@ class IsTakipController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $is = Isler::find($id);
+        if (! $is)        
+            return response()->json(['success'=>'İş bulunamadı']);
+            
+        $sonuc = $is->update($request->all());
+        if ($sonuc)
+            $mesaj = 'Güncelleme Başarılı';
+        else
+            $mesaj = 'Güncelleme başarısız...';    
+
+        return response()->json(['success'=>$mesaj]);
     }
 
     /**

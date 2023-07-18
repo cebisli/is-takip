@@ -37,7 +37,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <button class="btn btn-success btn-sm m-2 float-end" onclick="YeniKayit()">Yeni Müşteri
+                                <button class="btn btn-success btn-sm m-2 float-end" onclick="YeniKayit()">Yeni Kayıt
                                     Ekle</button>
                             </div>
                         </div>
@@ -45,8 +45,9 @@
                             <table class="table" id="Isler">
                                 <colgroup>
                                     <col width="5%">
-                                    <col width="20%">
-                                    <col width="20%">
+                                    <col width="5%">
+                                    <col width="15%">
+                                    <col width="15%">
                                     <col width="20%">
                                     <col width="20%">
                                     <col width="15%">
@@ -55,6 +56,7 @@
                                 <thead class="table-light">                                    
                                     <tr>
                                         <th>No</th>
+                                        <th>Durum</th>
                                         <th>İş Adı</th>
                                         <th>Sahibi</th>    
                                         <th>Şirket Adı</th>
@@ -67,6 +69,13 @@
                                     @foreach ($isler as $i)      
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                @if($i->durum == 0) 
+                                                    <span style="color:white; padding:5px; background-color:#B22222">  Başlanılmamış </span>
+                                                @else  
+                                                    <span style="color:white; padding:5px; background-color:#228B22">  Tamamlanmış </span>
+                                                @endif
+                                            </td>
                                             <td>{{$i->baslik}}</td>
                                             <td>{{$i->user->name}}</td>
                                             <td>{{$i->musteri->Unvan}}</td>
@@ -91,8 +100,17 @@
     <div id="YeniIs" title="Yeni İş Kaydı" style="display: none;">
             <div class="controls">
                 <div class="row justify-content-between text-left">
+                    <div class="form-group col-md-12 flex-column d-flex"> 
+                        <label class="form-control-label px-3">İşin Durumu<span class="text-danger"> *</span></label> 
+                        <select class="form-control" required='required' id='durum' onchange="TalepDurum()" onblur="validate(this)">
+                            <option value="0" selected='selected'>Başlanılmamış</option>
+                            <option value="1">Tamamlanmış</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row justify-content-between text-left">
                     <div class="form-group col-md-6 flex-column d-flex"> 
-                        <label class="form-control-label px-3">Çalışanlar<span class="text-danger"> *</span></label> 
+                        <label class="form-control-label px-3">İşin Sahibi<span class="text-danger"> *</span></label> 
                         <select class="form-control" required='required' id='user_id' onblur="validate(this)">
                             <option value="-1">Seçiniz</option>
                             @foreach ($kullanicilar as $user)
@@ -127,7 +145,13 @@
                         <label class="form-control-label px-3">İş İle İlgili Notlar</label> 
                         <textarea id="not" onblur="validate(this)"></textarea>
                     </div>
-                </div>                    
+                </div>
+                <div class="row justify-content-between text-left">
+                    <div class="form-group col-md-6 flex-column d-flex"> 
+                        <label class="form-control-label px-3">Son Tarih</label> 
+                        <input type="datetime-local" id="son_tarih" class="form-control" value="{{ now()->setTimezone('T')->format('Y-m-dTh:m') }}">            
+                    </div>
+                </div>                        
                 <div class="row">
                     <div class="col-md-12">
                         <input type="submit" class="btn btn-success btn-send  pt-2 btn-block modal-success-btn" value="Kaydet" id="Kaydet">
@@ -140,50 +164,54 @@
     <script>
         var tableId = "Isler";
         var ModalDivId = "YeniIs";
-        let alanlar = ['name', 'email', 'pass_1'];
+        let alanlar = ['user_id','musteri_id','baslik', 'aciklama', 'not','durum', 'son_tarih'];
 
         $(function() {
             JsDataTable(tableId);
+            TalepDurum();
         });
 
-        // function YeniKayit() {            
-        //     inputSifirla();
-        //     ShowBSDialog(ModalDivId, null);    
-        // }        
+        function YeniKayit() {            
+            inputSifirla();
+            ShowBSDialog(ModalDivId, null, Modal_Large);    
+        }        
 
-        $("#Kaydet").click(function() {        
-            alert(123123);
-            // var obj = { };
+        $("#Kaydet").click(function() {                    
+            var obj = { };
 
-            // var doldurulmayanAlanVarMi = '';
-            // for (var i = 0; i<alanlar.length; i++)
-            // {
-            //     var inp = $('#'+alanlar[i]);
-            //     var val =  inp.val();
-            //     if ((val == '' || typeof val == 'undefined') && inp.attr('required'))
-            //     {
-            //         doldurulmayanAlanVarMi = inp.attr('placeholder');
-            //         break;
-            //     }
-            //     obj[alanlar[i]] = val;
-            // }
-            // if (doldurulmayanAlanVarMi != '')
-            //     return ShowWarning(doldurulmayanAlanVarMi);
+            var doldurulmayanAlanVarMi = '';
+            for (var i = 0; i<alanlar.length; i++)
+            {
+                var inp = $('#'+alanlar[i]);
+                var val =  inp.val();
+                if ((val == '' || typeof val == 'undefined') && inp.attr('required'))
+                {
+                    doldurulmayanAlanVarMi = inp.attr('placeholder');
+                    break;
+                }
+                obj[alanlar[i]] = val;
+            }
+            if (doldurulmayanAlanVarMi != '')
+                return ShowWarning(doldurulmayanAlanVarMi);
 
-            // var musteriId = $('#DetayId').val();
-            // var cb = function(e) {
-            //     $(this).prop('disabled',true);              
-            //     ShowInfo(e.success, function(){ 
-            //         location.reload(); // sayfayı yenile
-            //     });
-            // };
+            var DetayId = $('#DetayId').val();
+            var cb = function(e) {
+                $(this).prop('disabled',true);              
+                ShowInfo(e.success, function(){ 
+                    location.reload(); // sayfayı yenile
+                });
+            };
 
-            // if (musteriId > 0)            
-            //     AjaxIslem("/admin/users/"+musteriId, obj, cb, 'POST');
-            // else
-            //     AjaxIslem("{{  route('user_kaydet') }}", obj, cb, 'POST');
-
-            // $("#"+ModalDivId).find('#DetayId').remove();            
+            var url = "{{ route('is_takip.store') }}";
+            var method = 'POST';
+            if (DetayId > 0)            
+            {
+                url = "{{ route('is_takip.update', ':id') }}";
+                url = url.replace(':id', DetayId);
+                method = 'PUT';
+            }            
+            AjaxIslem(url, obj, cb, method);    
+            $("#"+ModalDivId).find('#DetayId').remove();            
         });
 
         function KayitDuzenle(Id)
@@ -194,13 +222,20 @@
             AjaxIslem(url, null, function(e) {                
                 if (e.success)
                 {
-                    // for (const property in e.obj) 
-                    //     $('#'+property).val(e.obj[property]);                        
+                    for (const property in e.obj) 
+                        $('#'+property).val(e.obj[property]);                        
                          
                     $('#'+ModalDivId).attr('title','Kayıt Düzenle');
                     $("#Kaydet").val('Güncelle');
                     $('#'+ModalDivId).find('#DetayId').remove();
                     $('#'+ModalDivId).prepend('<input type="hidden" value="'+Id+'" id="DetayId">');
+
+                    TalepDurum();
+
+                    // Müşteriyi ve kullanıyıcı değiştirmesine izin vermiyoruz.
+                    $('#user_id').attr('disabled','disabled');
+                    $('#musteri_id').attr('disabled','disabled');
+
                     ShowBSDialog(ModalDivId, null, Modal_Large);
                 }
             });
@@ -208,12 +243,30 @@
 
         function inputSifirla()
         {                 
-            for (var i = 0; i<alanlar.length; i++)            
-                $('#'+alanlar[i]).val('');
+            for (var i = 0; i<alanlar.length; i++)
+            {
+                if (alanlar[i] != 'durum')            
+                    $('#'+alanlar[i]).val('');
+                else
+                    $('#'+alanlar[i]).val('0');
+            }
 
             $('#'+ModalDivId).attr('title','Yeni Kayıt');
             $("#Kaydet").val('Kaydet');   
             $("#"+ModalDivId).find('#MusteriId').remove(); 
+
+            $('#user_id').removeAttr('disabled').val('-1');
+            $('#musteri_id').removeAttr('disabled').val('-1');
+            TalepDurum();
+        }
+
+        function TalepDurum()
+        {
+            var deger = $('#durum').val();
+            if (deger == '0')
+                $('#durum').css({'background-color':'#990033', 'color':'white'});            
+            else
+                $('#durum').css({'background-color':'#6495ED', 'color':'white'});
         }
 
         function validate(obj) {

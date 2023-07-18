@@ -256,7 +256,7 @@ function JsDataTable(tableId)
 
 function AjaxIslem(url, GetData, CallBackFunction, methot = 'GET')
 {	
-	if (methot == 'POST')
+	if (methot != 'GET')
 		GetData._token = $('meta[name="csrf-token"]').attr('content');	
 	
 	$.ajax({

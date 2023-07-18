@@ -9,7 +9,7 @@ class Isler extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','user_id', 'musteri_id', 'baslik', 'aciklama', 'not', 'son_tarih'];
+    protected $fillable = ['id','user_id', 'musteri_id', 'baslik', 'aciklama', 'not', 'son_tarih', 'durum'];
     protected $table = 'isler';
 
 
