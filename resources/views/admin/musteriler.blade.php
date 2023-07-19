@@ -72,80 +72,26 @@
     <div id="YeniMusteri" title="Yeni Müşteri Kaydı" style="display: none;">
             <div class="controls">
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Unvan">Şirket Adı *</label>
-                            <input id="Unvan" type="text" name="Unvan" class="form-control"
-                                placeholder="Lütfen şirket adını giriniz *" required="required">
-
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="YetkiliAdSoyad">Yetkili *</label>
-                            <input id="YetkiliAdSoyad" type="text" name="YetkiliAdSoyad" class="form-control"
-                                placeholder="Lütfen şirket yetlisinin adını soyadını giriniz *" required="required">
-                        </div>
-                    </div>
+                    <x-input type="text" label="Şirket Adı" topclass='col-md-6' id='Unvan' placeholder="Lütfen şirket adını giriniz" required validate/>
+                    <x-input type="text" label="Yetkili Adı Soyadı" topclass='col-md-6' id='YetkiliAdSoyad' placeholder="Lütfen şirket yetlisinin adını soyadını giriniz" required validate/>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="VergiNumarasi">Vergi Numarası *</label>
-                            <input id="VergiNumarasi" type="text" name="VergiNumarasi" class="form-control"
-                                placeholder="Lütfen vergi numarasını giriniz *" required="required">
-
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="VergiDairesi">Vergi Dairesi</label>
-                            <input id="VergiDairesi" type="text" name="VergiDairesi" class="form-control"
-                                placeholder="Lütfen vergi dairesini giriniz">
-                        </div>
-                    </div>
+                    <x-input type="text" label="Vergi Numarasi" topclass='col-md-6' id='VergiNumarasi' placeholder="Lütfen vergi numarasını giriniz" required validate/>
+                    <x-input type="text" label="Vergi Dairesi" topclass='col-md-6' id='VergiDairesi' placeholder="Lütfen vergi dairesini giriniz" required validate/>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Telefon">Telefon *</label>
-                            <input id="Telefon" type="text" name="Telefon" class="form-control"
-                                placeholder="Lütfen şirket telefonunu giriniz *" required="required">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="EMail">Email</label>
-                            <input id="EMail" type="email" name="EMail" class="form-control"
-                                placeholder="Lütfen email adresini giriniz">
-                        </div>
-                    </div>                   
+                    <x-input type="text" topclass='col-md-6' label="Telefon" id='Telefon' placeholder="Lütfen şirket telefonunu giriniz" required validate/>
+                    <x-input type="email" topclass='col-md-6' label="Email" id='EMail' placeholder="Lütfen email adresini giriniz"/>                    
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Il">İL</label>
-                            <input id="Il" type="text" name="Il" class="form-control"
-                                placeholder="Lütfen ili giriniz">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="Ilce">İlçe</label>
-                            <input id="Ilce" type="text" name="Ilce" class="form-control"
-                                placeholder="Lütfen ilçeyi giriniz">
-                        </div>
-                    </div>                   
+                    <x-input type="text" topclass='col-md-6' label="İL" id='Il' placeholder="Lütfen ili giriniz"/>
+                    <x-input type="text" topclass='col-md-6' label="İlçe" id='Ilce' placeholder="Lütfen ilçeyi giriniz"/>                                     
+                </div>
+                <div class="row">
+                    <x-textarea type="text" label="Adres" topclass='col-md-12' id='Adres'/>                                   
                 </div>
                 
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="Adres">Adres</label>
-                            <textarea id="Adres" name="Adres" class="form-control"
-                                placeholder="Şirket Adresi" rows="4"></textarea>
-                        </div>
-                    </div>
                     <div class="col-md-12">
                         <input type="submit" class="btn btn-success btn-send  pt-2 btn-block modal-success-btn" value="Kaydet" id="MusteriKaydet">
                     </div>

@@ -272,3 +272,20 @@ function AjaxIslem(url, GetData, CallBackFunction, methot = 'GET')
 	});
 
 }
+
+
+function inputValidate(obj) {
+
+	var val = $(obj).val();
+
+	flag = false;
+	if ((val == "" || val <= 0) && $(obj).attr('required'))             
+		$(obj).css({'borderColor':'red'});
+	else
+	{
+		$(obj).css({'borderColor':'green'});
+		flag = true;
+	}
+
+	return flag;
+}

@@ -51,21 +51,10 @@
 
     <div id="YeniKullanici" title="Yeni Kullanıcı Kaydı" style="display: none;">
             <div class="controls">
-                <div class="form-group">
-                    <label for="name">Kullanıcı Adı-Soyadı *</label>
-                    <input id="name" type="text" class="form-control"
-                        placeholder="Lütfen kullanıcı adını soyadını giriniz *" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input id="email" type="email" class="form-control"
-                        placeholder="Lütfen kullanıcının email adresini giriniz" required="required">
-                </div>
-                <div class="form-group">
-                    <label for="pass_1">Kullanıcı Parolası *</label>
-                    <input id="pass_1" type="text" class="form-control"
-                        placeholder="Lütfen parola oluşturunuz *" required="required">
-                </div>                
+                <x-input type="text" label="Kullanıcı Adı-Soyadı" id='name' placeholder="Lütfen kullanıcı adını soyadını giriniz" required validate/>
+                <x-input type="text" label="Email" id='email' placeholder="Lütfen kullanıcının email adresini giriniz" required validate/>
+                <x-input type="text" label="Kullanıcı Parolası" id='pass_1' placeholder="Lütfen parola oluşturunuz" required validate/>
+              
                 <input type="submit" class="btn btn-success btn-send  pt-2 btn-block modal-success-btn" value="Kaydet" id="Kaydet">                
             </div>
     </div>

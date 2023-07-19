@@ -3,28 +3,6 @@
     İş Takip Sistemi
 @endsection
 
-@section('css')
-<style>
-    .form-control-label{margin-bottom: 0}
-    #YeniIs input, #YeniIs textarea, #YeniIs select{
-        padding: 8px 15px;
-        border-radius: 5px !important;
-        margin: 5px 0px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        font-size: 18px !important;
-        font-weight: 300
-    }
-    #YeniIs input:focus, #YeniIs textarea:focus, #YeniIs select:focus{
-        -moz-box-shadow: none !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-        border: 1px solid #00BCD4;
-        outline-width: 0;
-        font-weight: 400
-    }
-</style>
-@endsection
 @section('main')
     <div class="page-heading">
         <h3>İş Listesi</h3>
@@ -99,59 +77,39 @@
 
     <div id="YeniIs" title="Yeni İş Kaydı" style="display: none;">
             <div class="controls">
-                <div class="row justify-content-between text-left">
-                    <div class="form-group col-md-12 flex-column d-flex"> 
-                        <label class="form-control-label px-3">İşin Durumu<span class="text-danger"> *</span></label> 
-                        <select class="form-control" required='required' id='durum' onchange="TalepDurum()" onblur="validate(this)">
-                            <option value="0" selected='selected'>Başlanılmamış</option>
-                            <option value="1">Tamamlanmış</option>
-                        </select>
-                    </div>
+                <div class="row justify-content-between text-left">                    
+                    <x-select type="text" label="Müşteriler" topclass='col-md-12 flex-column d-flex' id='durum' required validate onchange="TalepDurum()">
+                        <option value="0" selected='selected'>Başlanılmamış</option>
+                        <option value="1">Tamamlanmış</option> 
+                    </x-select>
+                </div>
+                <div class="row justify-content-between text-left">                    
+                    <x-select type="text" label="İşin Sahibi" topclass='col-md-6 flex-column d-flex' id='user_id' required validate>
+                        <option value="-1">Seçiniz</option>
+                        @foreach ($kullanicilar as $user)
+                            <option value="{{$user->id}}">{{$user->name}}</option>
+                        @endforeach 
+                    </x-select>
+                    <x-select type="text" label="Müşteriler" topclass='col-md-6 flex-column d-flex' id='musteri_id' required validate>
+                        <option value="-1">Seçiniz</option>
+                        @foreach ($musteriler as $musteri)
+                            <option value="{{$musteri->id}}">{{$musteri->Unvan}}</option>
+                        @endforeach 
+                    </x-select>    
                 </div>
                 <div class="row justify-content-between text-left">
-                    <div class="form-group col-md-6 flex-column d-flex"> 
-                        <label class="form-control-label px-3">İşin Sahibi<span class="text-danger"> *</span></label> 
-                        <select class="form-control" required='required' id='user_id' onblur="validate(this)">
-                            <option value="-1">Seçiniz</option>
-                            @foreach ($kullanicilar as $user)
-                                <option value="{{$user->id}}">{{$user->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6 flex-column d-flex"> 
-                        <label class="form-control-label px-3">Müşteriler<span class="text-danger"> *</span></label> 
-                        <select class="form-control" required='required' id='musteri_id' onblur="validate(this)">
-                            <option value="-1">Seçiniz</option>
-                            @foreach ($musteriler as $musteri)
-                                <option value="{{$musteri->id}}">{{$musteri->Unvan}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <x-input type="text" label="Başlık" topclass='col-md-12 flex-column d-flex' id='baslik' placeholder="Yapılacak İşin Başlığı" required validate/>
                 </div>
                 <div class="row justify-content-between text-left">
-                    <div class="form-group col-md-12 flex-column d-flex"> 
-                        <label class="form-control-label px-3">Başlık<span class="text-danger"> *</span></label> 
-                        <input type="text" id="baslik" required='required' placeholder="Yapılacak İşin Başlığı" onblur="validate(this)"> 
-                    </div>
+                    <x-textarea type="text" label="İşin Açıklaması" topclass='col-md-12 flex-column d-flex' id='aciklama' required validate/>
                 </div>
                 <div class="row justify-content-between text-left">
-                    <div class="form-group col-md-12 flex-column d-flex"> 
-                        <label class="form-control-label px-3">İşin Açıklaması<span class="text-danger"> *</span></label> 
-                        <textarea id="aciklama" required='required' onblur="validate(this)"></textarea>
-                    </div>
+                    <x-textarea type="text" label="İş İle İlgili Notlar" topclass='col-md-12 flex-column d-flex' id='not'/>
                 </div>
                 <div class="row justify-content-between text-left">
-                    <div class="form-group col-md-12 flex-column d-flex"> 
-                        <label class="form-control-label px-3">İş İle İlgili Notlar</label> 
-                        <textarea id="not" onblur="validate(this)"></textarea>
-                    </div>
-                </div>
-                <div class="row justify-content-between text-left">
-                    <div class="form-group col-md-6 flex-column d-flex"> 
-                        <label class="form-control-label px-3">Son Tarih</label> 
-                        <input type="datetime-local" id="son_tarih" class="form-control" value="{{ now()->setTimezone('T')->format('Y-m-dTh:m') }}">            
-                    </div>
-                </div>                        
+                    <x-input type="datetime-local" label="Son Tarih" topclass='col-md-6 flex-column d-flex' id='son_tarih' value="{{ now()->setTimezone('T')->format('Y-m-dTh:m') }}"/>
+                </div>                
+
                 <div class="row">
                     <div class="col-md-12">
                         <input type="submit" class="btn btn-success btn-send  pt-2 btn-block modal-success-btn" value="Kaydet" id="Kaydet">
@@ -267,22 +225,6 @@
                 $('#durum').css({'background-color':'#990033', 'color':'white'});            
             else
                 $('#durum').css({'background-color':'#6495ED', 'color':'white'});
-        }
-
-        function validate(obj) {
-
-            var val = $(obj).val();
-
-            flag = false;
-            if ((val == "" || val <= 0) && $(obj).attr('required'))             
-                $(obj).css({'borderColor':'red'});
-            else
-            {
-                $(obj).css({'borderColor':'green'});
-                flag = true;
-            }
-
-            return flag;
         }
     </script>
 @endsection

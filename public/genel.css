@@ -34,3 +34,22 @@ table.dataTable tbody td {
 tbody, td, tfoot, th, thead, tr {
     border: none;
 }
+
+.form-control-label{margin-bottom: 0}
+.controls input, .controls textarea, .controls select{
+	padding: 8px 15px;
+	border-radius: 5px !important;
+	margin: 5px 0px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	font-size: 18px !important;
+	font-weight: 300
+}
+.controls input:focus, .controls textarea:focus, .controls select:focus{
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	border: 1px solid #00BCD4;
+	outline-width: 0;
+	font-weight: 400
+}
